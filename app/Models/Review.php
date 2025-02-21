@@ -11,6 +11,7 @@ class Review extends Model
 
     public function book()
     {
+        // this stating that this review model belong to the book model as one-to-one relationship
         return $this->belongsTo(Book::class);
     }
 }

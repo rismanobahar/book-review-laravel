@@ -16,11 +16,15 @@ class BookFactory extends Factory
      */
     public function definition(): array
     {
+        // generate the following dummy data model
         return [
-            'title' => fake()->sentence(3),
-            'author' => fake()->name,
-            'crated_at' => fake()->dateTimeBetween('-2 years'),
-            'updated_at' => fake()->dateTimeBetween('created_at', 'now')
+            'title' => fake()->sentence(3), // generate sentence with at least 3 words or more
+            'author' => fake()->name, // generate a name  
+            'created_at' => fake()->dateTimeBetween('-2 years'), //generate a created date
+            // 'updated_at' => fake()->dateTimeBetween('created_at', 'now') // generate an updated date(old code)
+            'updated_at' => function (array $attributes) { // generate updated data(new code)
+                return fake()->dateTimeBetween($attributes['created_at'], 'now');
+            },
         ];
     }
 }

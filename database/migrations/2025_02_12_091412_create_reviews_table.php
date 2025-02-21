@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('book_id');
+            // comment the book_id table on the below code for the simplified code
+            $table->unsignedBigInteger('book_id'); 
             $table->text('review');
             $table->unsignedTinyInteger('rating');
             $table->timestamps();
-            // $table->foreign('book_id')->references('id')->on('books')
-            // ->onDelete('cascade');
 
-            $table->foreignId('book_id')->constrained()->cascadeOnDelete();
+            // create a relationship between code. book_id(foreign key), id(primary key), books(table), cascade(to delete the entire colum related with the deleted data)
+            $table->foreign('book_id')->references('id')->on('books')
+            ->onDelete('cascade'); 
+
+            // the following code help to simplify the code on the above code for creating table relationship
+            // $table->foreignId('book_id')->constrained()->cascadeOnDelete();
         });
     }
 

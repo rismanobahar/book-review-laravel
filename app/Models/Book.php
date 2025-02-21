@@ -11,6 +11,7 @@ class Book extends Model
 
     public function reviews() 
     {
+        // this stating that the book model has one-to-many relationship with review model
         return $this->hasMany(Review::class);
     }
 }
