@@ -9,11 +9,21 @@
 7. php artisan make:factory ReviewFactory --model=Review = make a dummy data for review table
 8. php artisan migrate:refresh --seed = to insert the dummy data into database
 9. php artisan tinker = run powershell in CLI
-10. TINKER - $books = \App\Models\Book::with('reviews')->find(1); = to find certain book and review                 
-11. TINKER - $review = $book->reviews; = find all the books review
+10. TINKER - $books = \App\Models\Book::with('reviews')->find(1); = to create a variable called boon and then find certain book and review                 
+11. TINKER - $review = $book->reviews; = create a variable name $review and then find all the books review
 12. TINKER - $book = \App\Models\Book::find(1); = find the first book
 13. TINKER - $books = \App\Models\Book::with('reviews')->take(3)->get(); = find the first 3 books and reviews
-14. TINKER - $book->load('reviews');
+14. TINKER - $book->load('reviews'); = to load the reviews data
+15. TINKER - $review = new \App\Models\Review(); = create new object that is review
+16. TINKER - $review->review = 'This was fine'; = defining this String into database
+17. TINKER - $review->rating = 3; = defining this number into database
+18. TINKER - $book->reviews()->save($review); = inserting the data into database
+19. TINKER - $review = $book->reviews()->create(['review' => 'Sample review', 'rating' => 5]); = insert the review and rating object after making these column fillable in the model
+20. TINKER - $review = \App\Models\Review::find(1); = find review in id 1
+21. TINKER - $review->book; = find the book column via review properties 
+22. TINKER - $book2 = \App\Models\Book:find(2); = create a variable $book2 and find the second row book data
+23. TINKER - $book2->reviews()->save($review); = save the review data from id 1(first row of column) and connect it with the book data
+24. TINKER - $review = \App\Models\Review::with('book')->find(1); = find the book and review in the first row data
 
 ## folder list detail : 
 1. app/Models = Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships 
