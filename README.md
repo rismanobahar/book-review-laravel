@@ -24,6 +24,7 @@
 22. TINKER - $book2 = \App\Models\Book:find(2); = create a variable $book2 and find the second row book data
 23. TINKER - $book2->reviews()->save($review); = save the review data from id 1(first row of column) and connect it with the book data
 24. TINKER - $review = \App\Models\Review::with('book')->find(1); = find the book and review in the first row data
+25. TINKER - \App\Models\Book::where('title', 'LIKE', '%qui%')->get(); = to find particular title column with the word 'qui' from the database
 
 ## folder list detail : 
 1. app/Models = Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships 
