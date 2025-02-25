@@ -24,7 +24,10 @@
 22. TINKER - $book2 = \App\Models\Book:find(2); = create a variable $book2 and find the second row book data
 23. TINKER - $book2->reviews()->save($review); = save the review data from id 1(first row of column) and connect it with the book data
 24. TINKER - $review = \App\Models\Review::with('book')->find(1); = find the book and review in the first row data
-25. TINKER - \App\Models\Book::where('title', 'LIKE', '%qui%')->get(); = to find particular title column with the word 'qui' from the database
+25. TINKER - \App\Models\Book::where('title', 'LIKE', '%qui%')->get(); = to find particular title column with the 'LIKE' operator and the word 'qui' from the database 
+26. TINKER - \App\Models\Book::title('delectus')->get(); = a simpler way compared to the previous command after adding particular code in the model
+27. TINKER - \App\Models\Book::title('delectus')->where('created_at', '>', '2023-01-01')->get(); = find the particular data where it was created from 2023-01-01
+28. TINKER - \App\Models\Book::title('delectus')->where('created_at', '>', '2023-01-01')->toSql; = convert the ORM query into sql query
 
 ## folder list detail : 
 1. app/Models = Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships 
