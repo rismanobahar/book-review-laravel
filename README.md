@@ -28,6 +28,12 @@
 26. TINKER - \App\Models\Book::title('delectus')->get(); = a simpler way compared to the previous command after adding particular code in the model
 27. TINKER - \App\Models\Book::title('delectus')->where('created_at', '>', '2023-01-01')->get(); = find the particular data where it was created from 2023-01-01
 28. TINKER - \App\Models\Book::title('delectus')->where('created_at', '>', '2023-01-01')->toSql; = convert the ORM query into sql query
+29. TINKER - \App\Models\Book::withCount('reviews')->get(); = add a new table column to count reviews in each data
+30. TINKER - \App\Models\Book::withCount('reviews')->latest()->limit(3)->get(); = only show the top 3 recent data
+31. TINKER - \App\Models\Book::limit(5)->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating')->get(); = to get the average rating of reviews for each book with limit 5 data with the column name : reviews_avg_rating
+32. TINKER - \App\Models\Book::limit(5)->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating')->toSql(); = to generate Sql query with limit 5 data
+33. TINKER - \App\Models\Book::withCount('reviews')->withAvg('reviews', 'rating')->having('reviews_count', '>=', 10)->orderBy('reviews_avg_rating', 'desc')->limit(10)->get(); = count the reviews average that has the best rating and have at least 10 or more reviews with such amount in descending sort and limit the display in 10
+34. TINKER - \App\Models\Book::withCount('reviews')->withAvg('reviews', 'rating')->having('reviews_count', '>=', 10)->orderBy('reviews_avg_rating', 'desc')->limit(10)->toSql(); = convert the code above into Sql query 
 
 ## folder list detail : 
 1. app/Models = Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships 
