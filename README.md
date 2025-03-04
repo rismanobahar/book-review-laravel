@@ -59,15 +59,14 @@ php artisan serve
 ## folder list detail : 
 - **app/Models**: Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships.
     - `Book.php` : creating interface to interact with book table.
-- database/migrations = Defines the structure of a database table (columns, types, constraints). It is used to create, modify, or delete tables
-- database/factories = defining/generating model dummy data
-- database/seeders = generate dummy data into the database
+    - `Review.php` : creating interface to interact with review table.
+- **database/factories** : defining/generating model dummy data.
+    - `BookFactory.php` :  generate and define the model of dummy data on book table.
+    - `ReviewFactory.php` : generate and define the model of dummy data on review table.
+- **database/migrations** : Defines the structure of a database table (columns, types, constraints). It is used to create, modify, or delete tables.
+    - `create_books_table.php` : define the db structure for books table.
+    - `create_reviews_table.php` : define the db structure for review table.
+- **database/seeders** : generate dummy data into the database.
+    - `DatabaseSeeder.php` : seeds the database with fake/dummy data
+- `.env` : configuring database and connection.
 
-## file list detail :
-- .env = configuring database and connection
-- database/migrations/create_books_table.php = define the db structure for books table
-- database/migrations/create_reviews_table.php = define the db structure for review table
-- app/Models/Book.php = creating interface to interact with book table
-- app/Models/Review.php = creating interface to interact with review table
-- database/factories/BookFactory.php = generate and define the model of dummy data on book table
-- database/factories/ReviewFactory.php = generate and define the model of dummy data on review table
