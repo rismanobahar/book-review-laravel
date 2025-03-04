@@ -57,7 +57,8 @@ php artisan serve
 - TINKER - \App\Models\Book::popular()->highestRated()->get(); = to list the most popular book based on reviews and rating
 
 ## folder list detail : 
-- **app/Models**: Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships 
+- **app/Models**: Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships.
+    - `Book.php` : creating interface to interact with book table.
 - database/migrations = Defines the structure of a database table (columns, types, constraints). It is used to create, modify, or delete tables
 - database/factories = defining/generating model dummy data
 - database/seeders = generate dummy data into the database
