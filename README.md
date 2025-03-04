@@ -56,7 +56,7 @@ php artisan serve
 - TINKER - \App\Models\Book::withCount('reviews')->withAvg('reviews', 'rating')->having('reviews_count', '>=', 10)->orderBy('reviews_avg_rating', 'desc')->limit(10)->toSql(); = convert the code above into Sql query 
 - TINKER - \App\Models\Book::popular()->highestRated()->get(); = to list the most popular book based on reviews and rating
 
-## folder list detail : 
+## folder and file list detail : 
 - **app/Models**: Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships.
     - `Book.php` : creating interface to interact with book table.
     - `Review.php` : creating interface to interact with review table.
