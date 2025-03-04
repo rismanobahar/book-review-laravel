@@ -21,4 +21,20 @@ class Book extends Model
     {
         return $query->where('title', 'LIKE', '%' . $title . '%');
     }
+
+    //the two below function are used for sorting the data by the most popular reviews and average rating
+
+    //to query the reviews column and order the element by reviews_count in descendant order
+    public function scopePopular(Builder $query): Builder
+    {
+        return $query->withCount('reviews')
+        ->orderBy('reviews_count', 'desc');
+    }
+
+    // to query the reviews and rating to find the average rating in descendant order
+    public function scopeHighestRated(Builder $query): Builder
+    {
+        return $query->withAvg('reviews', 'rating')
+        ->orderBy('reviews_avg_rating', 'desc');
+    }
 }

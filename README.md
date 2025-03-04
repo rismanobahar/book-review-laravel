@@ -54,9 +54,10 @@ php artisan serve
 - TINKER - \App\Models\Book::limit(5)->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating')->toSql(); = to generate Sql query with limit 5 data
 - TINKER - \App\Models\Book::withCount('reviews')->withAvg('reviews', 'rating')->having('reviews_count', '>=', 10)->orderBy('reviews_avg_rating', 'desc')->limit(10)->get(); = count the reviews average that has the best rating and have at least 10 or more reviews with such amount in descending sort and limit the display in 10
 - TINKER - \App\Models\Book::withCount('reviews')->withAvg('reviews', 'rating')->having('reviews_count', '>=', 10)->orderBy('reviews_avg_rating', 'desc')->limit(10)->toSql(); = convert the code above into Sql query 
+- TINKER - \App\Models\Book::popular()->highestRated()->get(); = to list the most popular book based on reviews and rating
 
 ## folder list detail : 
-- app/Models = Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships 
+- **app/Models**: Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships 
 - database/migrations = Defines the structure of a database table (columns, types, constraints). It is used to create, modify, or delete tables
 - database/factories = defining/generating model dummy data
 - database/seeders = generate dummy data into the database
