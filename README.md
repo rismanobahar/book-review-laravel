@@ -1,6 +1,6 @@
 ## DESCRIPTION
 
-This is a project about book review where there will be some books with review as comments and rating.
+**This is a project about book review where there will be some books with review as comments and rating.**
 
 ## TECH STACK
 
@@ -13,14 +13,14 @@ This project will using some stacks as follows:
 - **containerization** = Docker
 
 ## Installation Steps
-
-`git clone https://github.com/rismanobahar/book-review-laravel.git`
-`cd book-review`
-`composer install`
-`cp .env.example .env`
-`php artisan key:generate`
-`php artisan migrate --seed`
-`php artisan serve`
+                               
+- `git clone https://github.com/rismanobahar/book-review-laravel.git`
+- `cd book-review`
+- `composer install`
+- `cp .env.example .env`
+- `php artisan key:generate`
+- `php artisan migrate --seed`
+- `php artisan serve`
 
 ## Command Line List Detail
 
@@ -62,6 +62,8 @@ This project will using some stacks as follows:
 - **TINKER** - `\App\Models\Book::withCount('reviews')->withAvg('reviews', 'rating')->having('reviews_count', '>=', 10)->orderBy('reviews_avg_rating', 'desc')->limit(10)->get();` : count the reviews average that has the best rating and have at least 10 or more reviews with such amount in descending sort and limit the display in 10.
 - **TINKER** - `\App\Models\Book::withCount('reviews')->withAvg('reviews', 'rating')->having('reviews_count', '>=', 10)->orderBy('reviews_avg_rating', 'desc')->limit(10)->toSql();` : convert the code above into Sql query.
 - **TINKER** - `\App\Models\Book::popular()->highestRated()->get();` : to list the most popular book based on reviews and rating.
+- **TINKER** - `\App\Models\Book::highestRated()->get();` : list the all the book with from the highest rating
+- **TINKER** - `\App\Models\Book::highestRated('2023-02-01', '2023-03-30')->popular('2023-02-01', '2023-03-30')->minReviews(2)->get();` : list the top 2 reviews with the highest rating
 
 ## folder and file list detail : 
 

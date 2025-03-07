@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Query\Builder as QueryBuilder; //make the error sign disappear
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,16 +26,43 @@ class Book extends Model
     //the two below function are used for sorting the data by the most popular reviews and average rating
 
     //to query the reviews column and order the element by reviews_count in descendant order
-    public function scopePopular(Builder $query): Builder
+    public function scopePopular(Builder $query, $from = null, $to = null): Builder|QueryBuilder
     {
-        return $query->withCount('reviews')
+        return $query->withCount(['reviews' => fn(Builder $q) => $this->dateRangeFilter($q, $from, $to)]) //this is the separated cod
+        // return $query->withCount([ //this is the unseparated method
+        //     'reviews' => function (Builder $q) use ($from, $to) {
+        //         if ($from && !$to) {
+        //             $q->where('created_at', '>=', $from);
+        //         } elseif (!$from && $to) {
+        //             $q->where('created_at', '<=', $to);   
+        //         } elseif ($from && $to) {
+        //             $q->whereBetween('created_at', [$from, $to]);
+        //         }
+        //     }
+        // ])
         ->orderBy('reviews_count', 'desc');
     }
 
     // to query the reviews and rating to find the average rating in descendant order
-    public function scopeHighestRated(Builder $query): Builder
-    {
-        return $query->withAvg('reviews', 'rating')
+    public function scopeHighestRated(Builder $query, $from = null, $to = null): Builder|QueryBuilder
+    {  
+        return $query->withAvg(['reviews' => fn(Builder $q) => $this->dateRangeFilter($q, $from, $to)], 'rating')
         ->orderBy('reviews_avg_rating', 'desc');
+    }
+
+    public function scopeMinReviews(Builder $query, int $minReviews): Builder|QueryBuilder
+    {
+        return $query->having('reviews_count', '>=', $minReviews);
+    }
+
+    private function dateRangeFilter(Builder $query, $from = null, $to = null)
+    {
+        if ($from && !$to) {
+            $query->where('created_at', '>=', $from);
+        } elseif (!$from && $to) {
+            $query->where('created_at', '<=', $to);   
+        } elseif ($from && $to) {
+            $query->whereBetween('created_at', [$from, $to]);
+        }
     }
 }
