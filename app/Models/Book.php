@@ -50,19 +50,21 @@ class Book extends Model
         ->orderBy('reviews_avg_rating', 'desc');
     }
 
+    // query to find the book with the minimum reviews
     public function scopeMinReviews(Builder $query, int $minReviews): Builder|QueryBuilder
     {
         return $query->having('reviews_count', '>=', $minReviews);
     }
 
+    //query to find
     private function dateRangeFilter(Builder $query, $from = null, $to = null)
     {
-        if ($from && !$to) {
+        if ($from && !$to) {    
             $query->where('created_at', '>=', $from);
         } elseif (!$from && $to) {
-            $query->where('created_at', '<=', $to);   
+            $query->where('created_at', '<=', $to);
         } elseif ($from && $to) {
             $query->whereBetween('created_at', [$from, $to]);
-        }
+        }  
     }
 }

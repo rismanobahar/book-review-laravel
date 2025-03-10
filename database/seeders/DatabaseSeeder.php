@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
                 ->good() //all the rating will be categorized as good by this program
                 ->for($book) //send this data to book id column
                 ->create(); //create the model and save it
-        });
+        }); 
 
         Book::factory(33)->create()->each(function ($book){ //create 33 book for dummy/fake data
             $numReviews = random_int(5, 30); //generate the number of review to be atleast 5 and 30 at maximum for each book

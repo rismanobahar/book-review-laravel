@@ -33,6 +33,8 @@ This project will using some stacks as follows:
 - `php artisan make:factory ReviewFactory --model` : Review = make a dummy data for review table.
 - `php artisan migrate:refresh --seed` : to insert the dummy data into database.
 - `php artisan tinker` : run powershell in CLI.
+- `php artisan make:controller BookController --resource` : create a resource controller
+- `php artisan route:list` : list all of the route command
 
 ## Tinker Commands
 
