@@ -21,7 +21,7 @@ return new class extends Migration
 
             // create a relationship between code. book_id(foreign key), id(primary key), books(table), cascade(to delete the entire colum related with the deleted data)
             $table->foreign('book_id')->references('id')->on('books')
-            ->onDelete('cascade'); 
+            ->onDelete('cascade');
 
             // the following code help to simplify the code on the above code for creating table relationship
             // $table->foreignId('book_id')->constrained()->cascadeOnDelete();
