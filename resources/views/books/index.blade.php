@@ -3,13 +3,45 @@
 @section('content')
 <h1 class="mb-10 text-2xl">Books</h1>
 
+<!-- Search Feature -->
 <form method="GET" action="{{ route('books.index') }}" class="mb-4 flex items-center space-x-2">
     <input type="text" name="title" placeholder="Search by Title"
     value="{{ request('title') }}" class="input h-10"/>
+    <input type="hidden" name="filter" value="{{ request('filter') }}"/>
     <button type="submit" class="btn h-10">Search</button>
     <a href="{{ route('books.index') }}" class="btn h-10">Clear</a>
 </form>
 
+
+<!-- Filter Feature -->
+<div class="filter-container mb-4 flex">
+    <!-- the list of books based on the selected filter. -->
+    @php
+    $filters = [
+        '' => 'Latest',
+        'popular_last_month' => 'Popular Last Month',
+        'popular_last_6months' => 'Popular Last 6 Months',
+        'highest_rated_last_month' => 'Highest Rated Last Month',
+        'highest_rated_last_6months' => 'Highest Rated Last 6 Months',
+    ];
+    @endphp
+
+    <!-- configure the filter feature to display the list of books based on the selected filter.  -->
+    @foreach ($filters as $key => $label)
+    <!-- 1. the href attribute is used as a route for displaying each filter. the '...request()->query()' code will retain 
+     the view if the user changing the search and filter constantly. the ''filter' => $key' code will select every
+     filter that is aliased as $key -->
+    <!-- 2. the class attribute will be showing every filter that is selected and applying the CSS. the 
+     '(request('filter') === null && $key === ' code will applying CSS for the null(lastest) filter otherwise 
+     otherwise it will apply view to the other filters-->
+        <a href="{{ route('books.index', [...request()->query(), 'filter' => $key]) }}"  
+           class="{{ request('filter') === $key || (request('filter') === null && $key === '') ? 'filter-item-active' : 'filter-item' }}">
+           {{ $label }}
+        </a>
+    @endforeach
+</div>
+
+<!-- Book List -->
 <ul>
     @forelse ($books as $book)
     <li class="mb-4">
@@ -31,6 +63,7 @@
             </div>
         </div>
     </li>
+    <!-- If the book list is empty, this will be shown -->
     @empty
     <li class="mb-4">
         <div class="empty-book-item">
