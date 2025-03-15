@@ -12,7 +12,6 @@
     <a href="{{ route('books.index') }}" class="btn h-10">Clear</a>
 </form>
 
-
 <!-- Filter Feature -->
 <div class="filter-container mb-4 flex">
     <!-- the list of books based on the selected filter. -->
@@ -32,8 +31,8 @@
      the view if the user changing the search and filter constantly. the ''filter' => $key' code will select every
      filter that is aliased as $key -->
     <!-- 2. the class attribute will be showing every filter that is selected and applying the CSS. the 
-     '(request('filter') === null && $key === ' code will applying CSS for the null(lastest) filter otherwise 
-     otherwise it will apply view to the other filters-->
+     '(request('filter') === null && $key === ' code will applying CSS for the null(latest) filter otherwise 
+     it will apply view to the other filters-->
         <a href="{{ route('books.index', [...request()->query(), 'filter' => $key]) }}"  
            class="{{ request('filter') === $key || (request('filter') === null && $key === '') ? 'filter-item-active' : 'filter-item' }}">
            {{ $label }}

@@ -81,4 +81,9 @@ This project will using some stacks as follows:
 - **database/seeders** : generate dummy data into the database.
     - `DatabaseSeeder.php` : seeds the database with fake/dummy data
 - `.env` : configuring database and connection.
+- **resources/views** :
+    - **/books** :
+        - `index.blade.php` : 
+    - **/layouts** :
+        - `app.blade.php` : 
 
