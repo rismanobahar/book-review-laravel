@@ -13,11 +13,20 @@ class BookController extends Controller
     public function index(Request $request)// this is the function to show the data from the database 'Request $request' is the parameter to get the data from the database and show it to the user interface 
     {
         $title = $request->input('title'); //this is the variable to get the data from the database with the title column as the parameter. input means the data that is inputted by the user
+        $filter = $request->input('filter', ''); //this is the variable to get the data from the database with the filter column as the parameter. input means the data that is inputted by the user. the default value is empty for showing the latest data
 
         $books = Book::when( 
-            $title, 
+            $title, //this is the condition to get the data from the database with the title column as the parameter
             fn($query, $title) => $query->title($title) //this is the query to get the data from the database with the title column as the parameter
-        ) ->get(); //this is the method to get the data from the database
+        );
+        $books = match ($filter) {
+            'popular_last_month' => $books->popularLastMonth(), //this is the query to get the data from the database with the most popular based on reviews last month
+            'popular_last_6months' => $books->popularLast6Months(), //this is the query to get the data from the database with the most popular based on reviews last 6 months
+            'highest_rated_last_month' => $books->highestRatedLastMonth(), //this is the query to get the data from the database with the highest rated based on rating last month
+            'highest_rated_last_6months' => $books->highestRatedLastMonth(), //this is the query to get the data from the database with the highest rated based on rating last 6 months 
+            default => $books->latest(), //this is the default value to show the latest data
+        };
+        $books = $books->get(); //this is the method to get the data from the database. using the books variable because there are many queries before
 
         return view('books.index', ['books' => $books]); //this is the view to show the data from the database to the user interface with 'books.index' as the parameter
     }

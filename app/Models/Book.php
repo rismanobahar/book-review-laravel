@@ -50,12 +50,6 @@ class Book extends Model
         ->orderBy('reviews_avg_rating', 'desc');
     }
 
-    // query to find the book with the minimum reviews
-    public function scopeMinReviews(Builder $query, int $minReviews): Builder|QueryBuilder
-    {
-        return $query->having('reviews_count', '>=', $minReviews);
-    }
-
     //query to find
     private function dateRangeFilter(Builder $query, $from = null, $to = null)
     {
@@ -68,6 +62,7 @@ class Book extends Model
         }  
     }
 
+    //query to find the most popular book in the last month
     public function scopePopularLastMonth(Builder $query): Builder|QueryBuilder
     {
         return $query->popular(now()->subMonth(), now())
@@ -75,6 +70,7 @@ class Book extends Model
         ->minReviews(2);
     }
 
+    //query to find the most popular book in the last 6 months
     public function scopePopularLast6Months(Builder $query): Builder|QueryBuilder
     {
         return $query->popular(now()->subMonths(6), now())
@@ -82,17 +78,25 @@ class Book extends Model
         ->minReviews(5);
     }
 
-    public function scopePopularLastMonth(Builder $query): Builder|QueryBuilder
+    //query to find the most highest rated book in the last year
+    public function scopeHighestRatedLastMonth(Builder $query): Builder|QueryBuilder
     {
         return $query->highestRated(now()->subMonth(), now())
         ->popular(now()->subMonth(), now())
         ->minReviews(2);
     }
 
-    public function scopePopularLast6Months(Builder $query): Builder|QueryBuilder
+    //query to find the most highest rated book in the last 6 months
+    public function scopeHighestRatedLast6Months(Builder $query): Builder|QueryBuilder
     {
         return $query->highestRated(now()->subMonths(6), now())
         ->popular(now()->subMonths(6), now())
         ->minReviews(5);
+    }
+
+    // query to find the book with the minimum reviews
+    public function scopeMinReviews(Builder $query, int $minReviews): Builder|QueryBuilder
+    {
+        return $query->having('reviews_count', '>=', $minReviews);
     }
 }
