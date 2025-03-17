@@ -50,9 +50,9 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Book $book)
     {
-        //
+        return view('books.show', ['book' => $book]); //this is the view to show the data from the database to the user interface with 'books.show' as the parameter    
     }
 
     /**
