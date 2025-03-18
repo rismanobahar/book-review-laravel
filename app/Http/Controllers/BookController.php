@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BookController extends Controller
 {
@@ -26,7 +27,9 @@ class BookController extends Controller
             'highest_rated_last_6months' => $books->highestRatedLastMonth(), //this is the query to get the data from the database with the highest rated based on rating last 6 months 
             default => $books->latest(), //this is the default value to show the latest data
         };
-        $books = $books->get(); //this is the method to get the data from the database. using the books variable because there are many queries before
+        // $books = $books->get(); //this is the method to get the data from the database. using the books variable because there are many queries before
+
+        $books = Cache::remember('books', 3600, fn() => $books->get()); //this is the method to cache the data from the database with the books variable as the parameter
 
         return view('books.index', ['books' => $books]); //this is the view to show the data from the database to the user interface with 'books.index' as the parameter
     }
@@ -52,8 +55,14 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('books.show', ['book' => $book]); //this is the view to show the data from the database to the user interface with 'books.show' as the parameter    
-    }
+        return view(
+            'books.show',
+             [
+                'book' => $book->load(['reviews' => fn($query) => $query->latest()
+                ])
+            ]
+        ); //this is the view to show the data from the database to the user interface with 'books.show' as the parameter    
+    }   
 
     /**
      * Show the form for editing the specified resource.
