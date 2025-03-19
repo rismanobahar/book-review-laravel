@@ -29,7 +29,17 @@ class BookController extends Controller
         };
         // $books = $books->get(); //this is the method to get the data from the database. using the books variable because there are many queries before
 
-        $books = Cache::remember('books', 3600, fn() => $books->get()); //this is the method to cache the data from the database with the books variable as the parameter
+        $cacheKey = 'books:' . $filter . $title;
+        // $books = Cache::remember('books', 3600, fn() => $books->get()); //this is the method to cache the data from the database with the books variable as the parameter
+        
+        $books = cache()->remember($cacheKey, 3600, fn() => $books->get());
+
+        // The below code is used to check if the data is from the cache or not
+        
+        // $books = cache()->remember($cacheKey, 3600, function() use ($books){
+        //     dd('Not from Cache');
+        //     return $books->get();
+        // });
 
         return view('books.index', ['books' => $books]); //this is the view to show the data from the database to the user interface with 'books.index' as the parameter
     }
