@@ -16,4 +16,9 @@ class Review extends Model
         // this stating that this review model belong to the book model as one-to-one relationship
         return $this->belongsTo(Book::class);
     }
+
+    protected static function booted()
+    {
+        static::updated(fn(Review $review) => cache()->forget('books:' . $review->book_id));
+    }
 }
