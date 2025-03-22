@@ -66,6 +66,12 @@ This project will using some stacks as follows:
 - **TINKER** - `\App\Models\Book::popular()->highestRated()->get();` : to list the most popular book based on reviews and rating.
 - **TINKER** - `\App\Models\Book::highestRated()->get();` : list the all the book with from the highest rating
 - **TINKER** - `\App\Models\Book::highestRated('2023-02-01', '2023-03-30')->popular('2023-02-01', '2023-03-30')->minReviews(2)->get();` : list the top 2 reviews with the highest rating
+- **TINKER** - `$review = \App\Models\Review::findOrFail(944);` : find the review with Id 944. If it exists, it returns the Review instance, if it doesn't exist, it throws an error ModelNotFoundException
+- **TINKER** - `$review->rating = 4;` : change the rating of that review to 4
+- **TINKER** - `$review` : show again the review with id 944
+- **TINKER** - `$review->save();` : save the change
+- **TINKER** - `$review->update(['rating' => 1]);` : another way/code to change the rating
+- **TINKER** - `\App\Models\Review::where('id', 944)->update(['rating' => 2]);` : this code will be working on changing the data in database but will not change the data in web
 
 ## folder and file list detail : 
 

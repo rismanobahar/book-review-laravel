@@ -11,14 +11,15 @@ class Review extends Model
 
     protected $fillable = ['review', 'rating']; //ensuring these specific filed can be mass assigned
 
-    public function book()
+    public function book()  
     {
         // this stating that this review model belong to the book model as one-to-one relationship
         return $this->belongsTo(Book::class);
     }
-
+    
     protected static function booted()
     {
         static::updated(fn(Review $review) => cache()->forget('books:' . $review->book_id));
+        static::deleted(fn(Review $review) => cache()->forget('books:' . $review->book_id));
     }
 }

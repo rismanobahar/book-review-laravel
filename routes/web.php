@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome'); //this is the laravel default view that will be displayed when the user visit the root url
+    // return redirect('/books'); //you can use this code to show the index layout or
+    return redirect()->route('books.index'); // you can use this code for the same purpose
 });
 
 Route::resource('books', BookController::class);
