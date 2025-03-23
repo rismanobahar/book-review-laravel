@@ -25,7 +25,7 @@ class BookController extends Controller
             'popular_last_6months' => $books->popularLast6Months(), //this is the query to get the data from the database with the most popular based on reviews last 6 months
             'highest_rated_last_month' => $books->highestRatedLastMonth(), //this is the query to get the data from the database with the highest rated based on rating last month
             'highest_rated_last_6months' => $books->highestRatedLastMonth(), //this is the query to get the data from the database with the highest rated based on rating last 6 months 
-            default => $books->latest(), //this is the default value to show the latest data
+            default => $books->latest()->withAvgRating()->withReviewsCount() //this is the default value to show the latest data
         };
         // $books = $books->get(); //this is the method to get the data from the database. using the books variable because there are many queries before. not using this anymore because we want to cache the data from the database
 
@@ -33,7 +33,12 @@ class BookController extends Controller
 
         // $books = Cache::remember('books', 3600, fn() => $books->get()); //this is the method to cache the data from the database with the books variable as the parameter
         
-        $books = cache()->remember($cacheKey, 3600, fn() => $books->get()); // this is another way to cache the data from the database with the books variable as the parameter
+        $books = 
+                cache()->remember(
+           $cacheKey,
+           3600,
+      fn() => 
+                $books->get()); // this is another way to cache the data from the database with the books variable as the parameter
 
         // The below code is used to check if the data is from the cache or not
         
@@ -64,12 +69,19 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show(int $id)
     {
-        $cacheKey = 'book:' . $book->id; //this is the variable to cache the data from the database with the book id as the parameter
+        $cacheKey = 'book:' . $id; //this is the variable to cache the data from the database with the book id as the parameter
 
-        $book = cache()->remember($cacheKey, 3600, fn() => $book->load(['reviews' => fn($query) => $query->latest()
-        ])); //this is the method to cache the data from the database with the book variable as the parameter
+        $book = cache()->remember
+        (
+            $cacheKey,
+            3600,
+       fn() => 
+                 Book::with([
+                    'reviews' => fn($query) => $query->latest()
+        ])->withAvgRating()->withReviewsCount()->findOrFail($id) //Get the avg rating and review count for the book
+    ); //this is the method to cache the data from the database with the book variable as the parameter
 
         return view('books.show',['book' => $book]); //this is the view to show the data from the database to the user interface with 'books.show' as the parameter    
     }   

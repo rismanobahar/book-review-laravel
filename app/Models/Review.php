@@ -17,9 +17,10 @@ class Review extends Model
         return $this->belongsTo(Book::class);
     }
     
+    //this code is used to cache the data from the database
     protected static function booted()
     {
-        static::updated(fn(Review $review) => cache()->forget('books:' . $review->book_id));
-        static::deleted(fn(Review $review) => cache()->forget('books:' . $review->book_id));
+        static::updated(fn(Review $review) => cache()->forget('books:' . $review->book_id)); //this is the method to cache the data from the database when the data is updated
+        static::deleted(fn(Review $review) => cache()->forget('books:' . $review->book_id)); //this is the method to cache the data from the database when the data is deleted
     }
 }
