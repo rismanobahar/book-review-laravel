@@ -53,7 +53,8 @@
                 </div>
                 <div>
                     <div class="book-rating">
-                        {{ number_format($book->reviews_avg_rating, 1) }} <!-- 1 mean the decimal is 1, e.g 1.0 -->
+                        <!-- {{ number_format($book->reviews_avg_rating, 1) }} 1 mean the decimal is 1, e.g 1.0 -->
+                        <x-star-rating :rating="$book->reviews_avg_rating"/>
                     </div>
                     <div class="book-review-count">
                         out of {{ $book->reviews_count }} {{ Str::plural('review', 2) }} 

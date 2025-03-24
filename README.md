@@ -35,6 +35,7 @@ This project will using some stacks as follows:
 - `php artisan tinker` : run powershell in CLI.
 - `php artisan make:controller BookController --resource` : create a resource controller
 - `php artisan route:list` : list all of the route command
+- `php artisan make:component StarRating` : to create a component named star rating
 
 ## Tinker Commands
 
@@ -87,9 +88,12 @@ This project will using some stacks as follows:
 - **database/seeders** : generate dummy data into the database.
     - `DatabaseSeeder.php` : seeds the database with fake/dummy data
 - `.env` : configuring database and connection.
-- **resources/views** :
-    - **/books** :
-        - `index.blade.php` : 
-    - **/layouts** :
-        - `app.blade.php` : 
+- **resources/views** : this directory is functioning for view / interface
+    - **/books** : this folder is used for the view of pages
+        - `index.blade.php` : displaying home page
+        - `show.blade.php` : displaying the the book page
+    - **/components** : 
+        - `star-rating.blade.php` : use this file to configure blade component for star rating in review 
+    - **/layouts** : storing layout templates that define the overall structure of the application's views
+        - `app.blade.php` : use this file to store all the styling configuration like Tailwind CSS
 
