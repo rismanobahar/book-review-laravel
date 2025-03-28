@@ -20,7 +20,7 @@ class ReviewController extends Controller
      */
     public function create(Book $book)
     {
-        return view('books.reviews.create', ['book' => $book]);
+        return view('books.reviews.create', ['book' => $book]); //return the view for creating a review
     }
 
     /**
@@ -28,14 +28,14 @@ class ReviewController extends Controller
      */
     public function store(Request $request, Book $book)
     {
-        $data = $request->validate([
-            'review' => 'required|min:15',
-            'rating' => 'required|min:1|max:5|integer'
+        $data = $request->validate([ //add validation rules
+            'review' => 'required|min:15', //minimum 15 characters
+            'rating' => 'required|min:1|max:5|integer' //1-5 rating
         ]);
 
-        $book->reviews()->create($data);
+        $book->reviews()->create($data); //create a new review
 
-        return redirect()->route('books.show', $book);
+        return redirect()->route('books.show', $book); //redirect to the book show page
     }
 
     /**
