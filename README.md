@@ -97,4 +97,6 @@ This project will using some stacks as follows:
         - `star-rating.blade.php` : use this file to configure blade component for star rating in review 
     - **/layouts** : storing layout templates that define the overall structure of the application's views
         - `app.blade.php` : use this file to store all the styling configuration like Tailwind CSS
+- **/app/Providers** : store service provider classes.  Service providers are the central place where Laravel bootstraps and configures various parts of the application, such as binding services into the service container, registering event listeners, or defining route configurations.
+    - `RouteServiceProvider.php` : define and configure how routes are loaded and managed in your application.
 
