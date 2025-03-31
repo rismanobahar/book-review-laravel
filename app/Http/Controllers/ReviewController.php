@@ -15,7 +15,11 @@ class ReviewController extends Controller
 
     public function __construct()
     {
-        $this->middleware('throttle:reviews')->only(['store']); //apply rate limiting to the store method. the throttle middleware is used to limit the number of requests to a given route. In this case, we are limiting the store method to 3 requests per hour.
+        $this->middleware('throttle:reviews')->only(['store']); 
+        /**apply rate limiting to the store method. the throttle middleware is
+         *  used to limit the number of requests to a given route. In this case,
+         *  we are limiting the store method to 3 requests per hour. activate it if you
+         *  want to limit the number of reviews a user can submit in an hour.**/
     }
     
     /**
