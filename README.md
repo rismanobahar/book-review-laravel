@@ -80,6 +80,8 @@ This project will using some stacks as follows:
 - **app/Models**: Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships.
     - `Book.php` : creating interface to interact with book table.
     - `Review.php` : creating interface to interact with review table.
+- **app/Providers** : store service provider classes.  Service providers are the central place where Laravel bootstraps and configures various parts of the application, such as binding services into the service container, registering event listeners, or defining route configurations.
+    - `RouteServiceProvider.php` : define and configure how routes are loaded and managed in your application.
 - **database/factories** : defining/generating model dummy data.
     - `BookFactory.php` :  generate and define the model of dummy data on book table.
     - `ReviewFactory.php` : generate and define the model of dummy data on review table.
@@ -97,6 +99,7 @@ This project will using some stacks as follows:
         - `star-rating.blade.php` : use this file to configure blade component for star rating in review 
     - **/layouts** : storing layout templates that define the overall structure of the application's views
         - `app.blade.php` : use this file to store all the styling configuration like Tailwind CSS
-- **/app/Providers** : store service provider classes.  Service providers are the central place where Laravel bootstraps and configures various parts of the application, such as binding services into the service container, registering event listeners, or defining route configurations.
-    - `RouteServiceProvider.php` : define and configure how routes are loaded and managed in your application.
+- **routes** :store all route definitions, including API routes
+    - **/web.php**: This file is used to define all the web routes for the application. These routes are loaded by the `RouteServiceProvider` and are assigned the `web` middleware group, which provides features like session state, CSRF protection, and cookie support. It is primarily used for routes that render views or handle browser-based requests.
+
 
