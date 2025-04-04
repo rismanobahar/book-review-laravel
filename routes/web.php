@@ -21,9 +21,8 @@ Route::get('/', function () {
     return redirect()->route('books.index'); // you can use this code for the same purpose
 });
 
-Route::resource('books', BookController::class)
-    ->only(['index', 'show']);
-
-Route::resource('books.reviews', ReviewController::class)
-    ->scoped(['review' => 'book'])
-    ->only(['create', 'store']);
+Route::resource('books', BookController::class) // this will create all the routes for the BookController
+    ->only(['index', 'show']); // this will only create the index and show routes for the BookController
+Route::resource('books.reviews', ReviewController::class) // this will create all the routes for the ReviewController
+    ->scoped(['review' => 'book']) // this will create the routes for the review controller. scoped means that the review is related to the book
+    ->only(['create', 'store']); // this will only create the create and store routes for the ReviewController
