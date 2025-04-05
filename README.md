@@ -78,7 +78,7 @@ This project will using some stacks as follows:
 ## folder and file list detail : 
 
 - **app/Models**: Represents a table in the database and provides an interface to interact with it. It contains business logic and relationships.
-    - `Book.php` : creating interface to interact with book table.
+    - [`Book.php`](app/Models/Book.php) : creating interface to interact with book table.
     - `Review.php` : creating interface to interact with review table.
 - **app/Providers** : store service provider classes.  Service providers are the central place where Laravel bootstraps and configures various parts of the application, such as binding services into the service container, registering event listeners, or defining route configurations.
     - `RouteServiceProvider.php` : define and configure how routes are loaded and managed in your application.
