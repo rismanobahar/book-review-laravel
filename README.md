@@ -29,8 +29,8 @@ This project will using some stacks as follows:
 - `php artisan make:model Book -m` : to make a model file and migration file for book.
 - `php artisan make:model Review -m` : to make a model file and migration file for Review.
 - `php artisan migrate` : to migrate the database table that has been defined in the migration file before.
-- `php artisan make:factory BookFactory --model` : Book = make a dummy data for book table.
-- `php artisan make:factory ReviewFactory --model` : Review = make a dummy data for review table.
+- `php artisan make:factory BookFactory --model=Book or php artisan make:factory BookFactory --model (which gives the same result)` : make a dummy data for book table.
+- `php artisan make:factory ReviewFactory --model=Review or php artisan make:factory ReviewFactory --model (which gives the same result)` : make a dummy data for review table.
 - `php artisan migrate:refresh --seed` : to insert the dummy data into database.
 - `php artisan tinker` : run powershell in CLI.
 - `php artisan make:controller BookController --resource` : create a resource controller for book
