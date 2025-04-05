@@ -11,9 +11,9 @@ class Book extends Model
 {
     use HasFactory;
 
+    // this stating that the book model has one-to-many relationship with review model
     public function reviews() 
     {
-        // this stating that the book model has one-to-many relationship with review model
         return $this->hasMany(Review::class);
     }
 
@@ -110,6 +110,7 @@ class Book extends Model
         return $query->having('reviews_count', '>=', $minReviews);
     }
 
+    // the below function is used to cache the data from the database
     protected static function booted()
     {
         static::updated(

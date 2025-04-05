@@ -28,10 +28,12 @@ class RouteServiceProvider extends ServiceProvider
         //     return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip()); //limit the request to 60 per minute by user id or ip address
         // });
 
+        // below is the rate limiter for the reviews route
         RateLimiter::for('reviews', function (Request $request) {
             return Limit::perHour(3)->by($request->user()?->id ?: $request->ip()); //limit the request to 3 per hour by user id or ip address
         });
 
+        // the code below is used to group the routes
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')

@@ -32,10 +32,10 @@
           <div>
             <div class="mb-2 flex items-center justify-between">
               <div class="font-semibold">
-                <x-star-rating :rating="$review->rating" />
+                <x-star-rating :rating="$review->rating" /> <!-- This will show the star rating that has been created based on the rating value. -->
               </div>
               <div class="book-review-count">
-                {{ $review->created_at->format('M j, Y') }}</div>
+                {{ $review->created_at->format('M j, Y') }}</div> <!-- This will show the date when the review was created. -->
             </div>
             <p class="text-gray-700">{{ $review->review }}</p>
           </div>
